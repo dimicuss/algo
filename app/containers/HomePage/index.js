@@ -1,22 +1,13 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { rangeRight } from 'lodash';
+
 import messages from './messages';
 import insertionSort from './lib/insertionSort';
 import selectSort from './lib/selectSort';
 import mergeSort from './lib/mergeSort';
 import logUtil from './lib/logUtil';
+
 
 const n = 10000;
 const descRange = rangeRight(n);
