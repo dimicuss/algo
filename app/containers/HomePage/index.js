@@ -11,43 +11,37 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { rangeRight, range } from 'lodash';
+import { rangeRight } from 'lodash';
 import messages from './messages';
 import insertionSort from './lib/insertionSort';
 import selectSort from './lib/selectSort';
+import mergeSort from './lib/mergeSort';
 
 const n = 5000;
 const descRange = rangeRight(n);
-const ascRange = range(n);
+// const ascRange = range(n);
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   insertionSortTest() {
-    console.log('selection sort');
-    console.time('desc');
     console.log(insertionSort(descRange));
-    console.timeEnd('desc');
-
-    console.time('asc');
-    insertionSort(ascRange);
-    console.timeEnd('asc');
   }
 
 
   selectSortTest() {
-    console.time('desc');
-    selectSort(descRange);
-    console.timeEnd('desc');
+    console.log(selectSort(descRange));
+  }
 
-    console.time('asc');
-    selectSort(ascRange);
-    console.timeEnd('asc');
+
+  mergeSort() {
+    console.log(mergeSort(descRange, 0, descRange.length - 1));
   }
 
 
   render() {
     this.insertionSortTest();
-    // this.selectSortTest();
+    this.selectSortTest();
+    this.mergeSort();
     return (
       <h1>
         <FormattedMessage {...messages.header} />
