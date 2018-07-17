@@ -7,14 +7,28 @@ import insertionSort from './lib/insertionSort';
 import selectSort from './lib/selectSort';
 import mergeSort from './lib/mergeSort';
 import logUtil from './lib/logUtil';
+import linearSearch from './lib/linearSearch';
+import binarySum from './lib/binarySum';
 
 
 const n = 10000;
 const descRange = rangeRight(n);
+const binaryNumberA = [0, 1, 1, 1, 1];
+const binaryNumberB = [1, 1, 1, 1, 1];
 // const ascRange = range(n);
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  binarySum() {
+    logUtil('binary sum', binarySum, binaryNumberA, binaryNumberB, Math.max(binaryNumberA.length, binaryNumberB.length));
+  }
+
+
+  linearSearch() {
+    logUtil('linear search', linearSearch, descRange, n - 1);
+  }
+
+
   insertionSortTest() {
     logUtil('insertion sort', insertionSort, descRange);
   }
@@ -34,6 +48,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     this.insertionSortTest();
     this.selectSortTest();
     this.mergeSort();
+    this.linearSearch();
+    this.binarySum();
     return (
       <h1>
         <FormattedMessage {...messages.header} />
