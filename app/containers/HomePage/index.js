@@ -9,6 +9,7 @@ import mergeSort from './lib/mergeSort';
 import logUtil from './lib/logUtil';
 import linearSearch from './lib/linearSearch';
 import binarySum from './lib/binarySum';
+import './lib/configMerge';
 
 
 const n = 10000;
