@@ -3,6 +3,10 @@ import { cond, isString, every, stubTrue, identity, pick, mapValues, isNil, some
 
 const handleConf = cond([
   [
+    isNil,
+    () => null,
+  ],
+  [
     isString,
     (type) => ({ type }),
   ],
@@ -30,10 +34,6 @@ function createCompareFunction(compareType) {
 }
 
 
-const areObjects = createTypeHandler(createCompareFunction('object'));
-const areArrays = createTypeHandler(createCompareFunction('array'));
-
-
 export default function createConfigMerge(mergeProperties) {
   const configMerge = cond([
     [
@@ -41,26 +41,26 @@ export default function createConfigMerge(mergeProperties) {
       (configA) => configA,
     ],
     [
-      areObjects,
-      createTypeHandler((configA, configB) => ({
+      createCompareFunction('object'),
+      (configA, configB) => ({
         ...configA,
         ...pick(configB, mergeProperties),
         properties: mapValues(configA.properties, (config, key) => configMerge(config, configB.properties[key])),
-      })),
+      }),
     ],
     [
-      areArrays,
-      createTypeHandler((configA, configB) => ({
+      createCompareFunction('array'),
+      (configA, configB) => ({
         ...configA,
         ...pick(configB, mergeProperties),
         items: configMerge(configA.items, configB.items),
-      })),
+      }),
     ],
     [
       stubTrue,
       identity,
     ],
-  ]);
+  ].map((condition) => condition.map(createTypeHandler)));
 
   return configMerge;
 }
