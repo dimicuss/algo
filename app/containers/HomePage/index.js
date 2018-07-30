@@ -53,8 +53,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
 
   sumSearch() {
-    const range = createRange(n);
-    logUtil('sum search', sumSearch, range, 1499);
+    logUtil('sum search', sumSearch, createRange(n), 1499);
   }
 
 
