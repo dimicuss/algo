@@ -12,6 +12,7 @@ import binarySum from './lib/binarySum';
 import binarySearch from './lib/binarySearch';
 import insertionSortRecursive from './lib/insertionSortRecursive';
 import sumSearch from './lib/sumSearch';
+import modificatedMegeSort from './lib/modificatedMegeSort';
 
 
 const n = 10000;
@@ -20,7 +21,7 @@ const binaryNumberB = [1, 1, 1, 1, 1];
 const createDescRange = (range = n) => rangeRight(range);
 
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class HomePage extends React.PureComponent {
   binarySum() {
     logUtil('binary sum', binarySum, binaryNumberA, binaryNumberB, Math.max(binaryNumberA.length, binaryNumberB.length));
   }
@@ -71,6 +72,11 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
 
 
+  modificatedMergeSort() {
+    const range = createDescRange(5);
+    logUtil('modificated merge sort', modificatedMegeSort, range, 0, range.length - 1);
+  }
+
   render() {
     this.insertionSortTest();
     this.selectSortTest();
@@ -80,6 +86,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     this.insertionSortRecursive();
     this.binarySearch();
     this.sumSearch();
+    this.modificatedMergeSort();
 
     return (
       <h1>
