@@ -1,8 +1,7 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { rangeRight, range as createRange } from 'lodash';
+import { rangeRight, range as createRange, random } from 'lodash';
+import NewSlotMachine from 'components/NewSlotMachine';
 
-import messages from './messages';
 import insertionSort from './lib/insertionSort';
 import selectSort from './lib/selectSort';
 import mergeSort from './lib/mergeSort';
@@ -21,7 +20,29 @@ const binaryNumberB = [1, 1, 1, 1, 1];
 const createDescRange = (range = n) => rangeRight(range);
 
 
+const images = [
+  'http://josex2r.github.io/jQuery-SlotMachine/img/slot1.png',
+  'http://josex2r.github.io/jQuery-SlotMachine/img/slot2.png',
+  'http://josex2r.github.io/jQuery-SlotMachine/img/slot3.png',
+  'http://josex2r.github.io/jQuery-SlotMachine/img/slot4.png',
+  'http://josex2r.github.io/jQuery-SlotMachine/img/slot5.png',
+  'http://josex2r.github.io/jQuery-SlotMachine/img/slot6.png',
+].map((image) => <img src={image} alt={image} />);
+
+
 export default class HomePage extends React.PureComponent {
+  state = {
+    target: 0,
+  };
+
+
+  handleButtonClick = () => {
+    this.setState({
+      target: this.state.target === 0 ? images.length - 1 : this.state.target - 1,
+    });
+  };
+
+
   binarySum() {
     logUtil('binary sum', binarySum, binaryNumberA, binaryNumberB, Math.max(binaryNumberA.length, binaryNumberB.length));
   }
@@ -78,20 +99,12 @@ export default class HomePage extends React.PureComponent {
   }
 
   render() {
-    this.insertionSortTest();
-    this.selectSortTest();
-    this.mergeSort();
-    this.linearSearch();
-    this.binarySum();
-    this.insertionSortRecursive();
-    this.binarySearch();
-    this.sumSearch();
-    this.modificatedMergeSort();
-
+    console.log(this.state.target);
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <NewSlotMachine width={100} height={100} target={this.state.target} padding={2} items={images} />
+        <button onClick={this.handleButtonClick}>Shuffle</button>
+      </div>
     );
   }
 }
